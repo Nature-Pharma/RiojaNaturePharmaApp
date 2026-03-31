@@ -1,0 +1,112 @@
+<div class="logistica">
+  <app-page-header
+    title="Logística"
+    subtitle="Gestión de inventario y envíos"
+    icon="local_shipping"
+    [breadcrumbs]="breadcrumbs"
+  >
+    <button mat-flat-button (click)="service.loadAll()" pageActions>
+      <mat-icon>refresh</mat-icon> Actualizar
+    </button>
+  </app-page-header>
+
+  <div class="np-page-content">
+    <div style="position:relative">
+      <app-loading-spinner [visible]="loading()" message="Cargando datos..." [inline]="true"></app-loading-spinner>
+    </div>
+
+    @if (!loading()) {
+      <!-- Alerta de stock crítico -->
+      @if (productosConAlerta().length > 0) {
+        <div class="alert-banner">
+          <mat-icon>warning_amber</mat-icon>
+          <span>
+            <strong>{{ productosConAlerta().length }} producto(s)</strong> con stock por debajo del mínimo
+          </span>
+        </div>
+      }
+
+      <!-- Inventario -->
+      <mat-card class="np-card" appearance="outlined">
+        <mat-card-header>
+          <mat-card-title>Inventario</mat-card-title>
+          <mat-card-subtitle>{{ productos().length }} materiales</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="table-container">
+          <table mat-table [dataSource]="productos()" class="np-table">
+            <ng-container matColumnDef="codigo">
+              <th mat-header-cell *matHeaderCellDef>Código</th>
+              <td mat-cell *matCellDef="let r"><strong>{{ r.codigo }}</strong></td>
+            </ng-container>
+            <ng-container matColumnDef="nombre">
+              <th mat-header-cell *matHeaderCellDef>Material</th>
+              <td mat-cell *matCellDef="let r">{{ r.nombre }}</td>
+            </ng-container>
+            <ng-container matColumnDef="stock">
+              <th mat-header-cell *matHeaderCellDef>Stock</th>
+              <td mat-cell *matCellDef="let r">
+                <span [class.text-error]="isStockCritico(r.stock, r.stockMinimo)">
+                  {{ r.stock | number }} {{ r.unidad }}
+                </span>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="stockMinimo">
+              <th mat-header-cell *matHeaderCellDef>Mínimo</th>
+              <td mat-cell *matCellDef="let r">{{ r.stockMinimo | number }} {{ r.unidad }}</td>
+            </ng-container>
+            <ng-container matColumnDef="unidad">
+              <th mat-header-cell *matHeaderCellDef>Unidad</th>
+              <td mat-cell *matCellDef="let r">{{ r.unidad }}</td>
+            </ng-container>
+            <ng-container matColumnDef="ubicacion">
+              <th mat-header-cell *matHeaderCellDef>Ubicación</th>
+              <td mat-cell *matCellDef="let r">{{ r.ubicacion }}</td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="colsProductos"></tr>
+            <tr mat-row *matRowDef="let row; columns: colsProductos;" class="table-row"></tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Envíos -->
+      <mat-card class="np-card" appearance="outlined" style="margin-top: 16px">
+        <mat-card-header>
+          <mat-card-title>Envíos y Recepciones</mat-card-title>
+          <mat-card-subtitle>{{ envios().length }} movimientos recientes</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="table-container">
+          <table mat-table [dataSource]="envios()" class="np-table">
+            <ng-container matColumnDef="referencia">
+              <th mat-header-cell *matHeaderCellDef>Referencia</th>
+              <td mat-cell *matCellDef="let r"><strong>{{ r.referencia }}</strong></td>
+            </ng-container>
+            <ng-container matColumnDef="origen">
+              <th mat-header-cell *matHeaderCellDef>Origen</th>
+              <td mat-cell *matCellDef="let r">{{ r.origen }}</td>
+            </ng-container>
+            <ng-container matColumnDef="destino">
+              <th mat-header-cell *matHeaderCellDef>Destino</th>
+              <td mat-cell *matCellDef="let r">{{ r.destino }}</td>
+            </ng-container>
+            <ng-container matColumnDef="fecha">
+              <th mat-header-cell *matHeaderCellDef>Fecha</th>
+              <td mat-cell *matCellDef="let r">{{ r.fecha | date:'dd/MM/yyyy' }}</td>
+            </ng-container>
+            <ng-container matColumnDef="transportista">
+              <th mat-header-cell *matHeaderCellDef>Transportista</th>
+              <td mat-cell *matCellDef="let r">{{ r.transportista }}</td>
+            </ng-container>
+            <ng-container matColumnDef="estado">
+              <th mat-header-cell *matHeaderCellDef>Estado</th>
+              <td mat-cell *matCellDef="let r">
+                <span class="np-badge np-badge--{{ estadoColor(r.estado) }}">{{ estadoLabel(r.estado) }}</span>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="colsEnvios"></tr>
+            <tr mat-row *matRowDef="let row; columns: colsEnvios;" class="table-row"></tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
+    }
+  </div>
+</div>
