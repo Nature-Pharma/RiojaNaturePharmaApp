@@ -1,0 +1,27 @@
+<div class="layout-wrapper">
+
+  <!-- Toolbar / Navbar -->
+  <app-navbar (toggleSidenav)="toggleSidenav()"></app-navbar>
+
+  <!-- Sidenav + Content -->
+  <mat-sidenav-container class="layout-container" autosize>
+
+    <!-- Side navigation -->
+    <mat-sidenav
+      class="layout-sidenav"
+      [mode]="sidenavMode()"
+      [opened]="sidenavOpened()"
+      (openedChange)="sidenavOpened.set($event)"
+      [fixedInViewport]="false"
+    >
+      <app-sidenav [collapsed]="sidenavCollapsed()"></app-sidenav>
+    </mat-sidenav>
+
+    <!-- Main content area -->
+    <mat-sidenav-content class="layout-content" role="main">
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+
+  </mat-sidenav-container>
+
+</div>
