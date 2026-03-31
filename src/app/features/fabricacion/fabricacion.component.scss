@@ -1,0 +1,56 @@
+@use '../../styles/variables' as vars;
+@use '../../styles/mixins' as mix;
+
+.fabricacion { height: 100%; }
+
+.table-container {
+  overflow-x: auto;
+  padding: 0 !important;
+}
+
+.np-table {
+  width: 100%;
+
+  th.mat-header-cell {
+    font-weight: 600;
+    color: vars.$np-text-secondary;
+    font-size: 13px;
+    padding: vars.$np-spacing-sm vars.$np-spacing-md;
+    background-color: vars.$np-background;
+  }
+
+  td.mat-cell {
+    padding: vars.$np-spacing-sm vars.$np-spacing-md;
+    font-size: 14px;
+  }
+}
+
+.table-row:hover {
+  background-color: vars.$np-background;
+  cursor: pointer;
+}
+
+.progress-cell {
+  display: flex;
+  align-items: center;
+  gap: vars.$np-spacing-sm;
+  min-width: 120px;
+}
+
+.progress-bar--success ::ng-deep .mdc-linear-progress__bar-inner {
+  border-color: vars.$np-success;
+}
+
+.progress-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: vars.$np-text-secondary;
+  white-space: nowrap;
+  min-width: 36px;
+}
+
+.no-data {
+  text-align: center;
+  color: vars.$np-text-disabled;
+  padding: vars.$np-spacing-2xl;
+}
