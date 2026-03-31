@@ -13,7 +13,7 @@
           <mat-card-title>Directorio de Personal</mat-card-title>
           <mat-card-subtitle>{{ empleados().length }} empleados ({{ empleados().filter(e => e.activo).length }} activos)</mat-card-subtitle>
         </mat-card-header>
-        <mat-card-content class="table-container">
+        <mat-card-content class="np-table-container">
           <table mat-table [dataSource]="empleados()" class="np-table">
             <ng-container matColumnDef="nombre">
               <th mat-header-cell *matHeaderCellDef>Nombre</th>
@@ -42,7 +42,7 @@
               </td>
             </ng-container>
             <tr mat-header-row *matHeaderRowDef="colsEmpleados"></tr>
-            <tr mat-row *matRowDef="let row; columns: colsEmpleados;" class="table-row"></tr>
+            <tr mat-row *matRowDef="let row; columns: colsEmpleados;" class="np-table-row"></tr>
           </table>
         </mat-card-content>
       </mat-card>
@@ -53,7 +53,7 @@
           <mat-card-title>Solicitudes de Permiso</mat-card-title>
           <mat-card-subtitle>{{ solicitudes().length }} solicitudes</mat-card-subtitle>
         </mat-card-header>
-        <mat-card-content class="table-container">
+        <mat-card-content class="np-table-container">
           <table mat-table [dataSource]="solicitudes()" class="np-table">
             <ng-container matColumnDef="empleado">
               <th mat-header-cell *matHeaderCellDef>Empleado</th>
@@ -78,7 +78,7 @@
               </td>
             </ng-container>
             <tr mat-header-row *matHeaderRowDef="colsSolicitudes"></tr>
-            <tr mat-row *matRowDef="let row; columns: colsSolicitudes;" class="table-row"></tr>
+            <tr mat-row *matRowDef="let row; columns: colsSolicitudes;" class="np-table-row"></tr>
           </table>
         </mat-card-content>
       </mat-card>

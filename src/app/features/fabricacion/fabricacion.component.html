@@ -25,7 +25,7 @@
           <mat-card-title>Órdenes de Producción</mat-card-title>
           <mat-card-subtitle>{{ ordenes().length }} órdenes activas</mat-card-subtitle>
         </mat-card-header>
-        <mat-card-content class="table-container">
+        <mat-card-content class="np-table-container">
           <table mat-table [dataSource]="ordenes()" class="np-table">
 
             <ng-container matColumnDef="codigo">
@@ -75,7 +75,7 @@
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="table-row"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="np-table-row"></tr>
 
             <tr class="mat-row" *matNoDataRow>
               <td class="mat-cell no-data" [attr.colspan]="displayedColumns.length">

@@ -4,10 +4,9 @@
 
 @use 'styles/variables' as vars;
 @use 'styles/mixins' as mix;
-
 @use '@angular/material' as mat;
 
-// Angular Material M3 theme - green/white palette
+// ── Angular Material M3 theme ─────────────────────────────────
 html {
   height: 100%;
   @include mat.theme((
@@ -18,23 +17,20 @@ html {
     density: 0,
   ));
 
-  // Override CSS variables for brand identity
-  --mat-sys-primary: #{vars.$np-primary};
-  --mat-toolbar-container-background-color: #{vars.$np-primary};
-  --mat-toolbar-container-text-color: #{vars.$np-text-on-primary};
-  --mat-sidenav-container-background-color: #{vars.$np-white};
-  --mat-sidenav-container-divider-color: #{vars.$np-border};
-  --mat-list-active-indicator-color: #{vars.$np-primary-lighter};
+  // Sidenav token overrides (toolbar overrides live in navbar.component.scss)
+  --mat-sys-primary:                       #{vars.$np-primary};
+  --mat-sidenav-container-background-color:#{vars.$np-white};
+  --mat-sidenav-container-divider-color:   #{vars.$np-border};
+  --mat-list-active-indicator-color:       #{vars.$np-primary-lighter};
 }
 
 body {
   color-scheme: light;
   background-color: vars.$np-background;
   color: vars.$np-text-primary;
-  font: var(--mat-sys-body-medium);
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
   margin: 0;
   height: 100%;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
 // ============================================================
@@ -47,14 +43,11 @@ body {
   margin: 0 auto;
   padding: 0 vars.$np-spacing-md;
 
-  @include mix.respond-to('xs') {
-    padding: 0 vars.$np-spacing-sm;
-  }
+  @include mix.respond-to('xs') { padding: 0 vars.$np-spacing-sm; }
 }
 
 .np-page-content {
   padding: vars.$np-spacing-lg;
-  height: 100%;
   box-sizing: border-box;
 
   @include mix.respond-to('xs') {
@@ -62,13 +55,9 @@ body {
   }
 }
 
-.np-card-grid {
-  @include mix.card-grid();
-}
-
-.np-card-grid--small {
-  @include mix.card-grid(200px);
-}
+.np-card-grid       { @include mix.card-grid(); }
+.np-card-grid--small { @include mix.card-grid(200px); }
+.np-spacer          { flex: 1 1 auto; }
 
 // Color utilities
 .text-primary   { color: vars.$np-primary; }
@@ -78,11 +67,11 @@ body {
 .text-secondary { color: vars.$np-text-secondary; }
 .text-muted     { color: vars.$np-text-disabled; }
 
-.bg-primary         { background-color: vars.$np-primary; color: vars.$np-white; }
-.bg-primary-light   { background-color: vars.$np-primary-lighter; }
-.bg-surface         { background-color: vars.$np-white; }
+.bg-primary       { background-color: vars.$np-primary;         color: vars.$np-white; }
+.bg-primary-light { background-color: vars.$np-primary-lighter; }
+.bg-surface       { background-color: vars.$np-white; }
 
-// Status badges
+// ── Status Badges ─────────────────────────────────────────────
 .np-badge {
   display: inline-flex;
   align-items: center;
@@ -91,44 +80,48 @@ body {
   font-size: 12px;
   font-weight: 500;
 
-  &--success { background-color: #E8F5E9; color: vars.$np-primary-dark; }
-  &--warning { background-color: #FFF3E0; color: #E65100; }
-  &--error   { background-color: #FFEBEE; color: #C62828; }
-  &--info    { background-color: #E3F2FD; color: #1565C0; }
+  &--success { background-color: vars.$np-success-bg; color: vars.$np-success-fg; }
+  &--warning { background-color: vars.$np-warning-bg; color: vars.$np-warning-fg; }
+  &--error   { background-color: vars.$np-error-bg;   color: vars.$np-error-fg; }
+  &--info    { background-color: vars.$np-info-bg;    color: vars.$np-info-fg; }
 }
 
-// Spacer
-.np-spacer { flex: 1 1 auto; }
+// ============================================================
+// Global Table Styles
+// (used by .np-table-container / .np-table / .np-table-row
+//  across fabricacion, logistica, rrhh, mantenimiento)
+// ============================================================
+
+.np-table-container {
+  overflow-x: auto;
+  padding: 0 !important;
+}
+
+.np-table {
+  width: 100%;
+
+  th.mat-header-cell {
+    font-weight: 600;
+    color: vars.$np-text-secondary;
+    font-size: 13px;
+    padding: 8px 16px;
+    background-color: vars.$np-background;
+  }
+
+  td.mat-cell {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .np-table-row:hover {
+    background-color: vars.$np-background;
+    cursor: pointer;
+  }
+}
 
 // ============================================================
 // Angular Material Overrides
 // ============================================================
-
-// Toolbar branding
-.mat-toolbar.np-main-toolbar {
-  background-color: vars.$np-primary;
-  color: vars.$np-text-on-primary;
-  box-shadow: vars.$np-shadow-md;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-
-  .mat-icon-button .mat-icon {
-    color: vars.$np-text-on-primary;
-  }
-}
-
-// Sidenav active link
-.mat-nav-list .mat-list-item.active-link {
-  background-color: vars.$np-primary-lighter;
-  border-right: 3px solid vars.$np-primary;
-
-  .mat-icon,
-  .nav-label {
-    color: vars.$np-primary-dark;
-    font-weight: 600;
-  }
-}
 
 // Cards
 .mat-mdc-card.np-card {
@@ -136,31 +129,19 @@ body {
   box-shadow: vars.$np-shadow-sm;
   transition: box-shadow 0.2s ease;
 
-  &:hover {
-    box-shadow: vars.$np-shadow-md;
-  }
-}
-
-// Buttons
-.mat-mdc-raised-button.mat-primary {
-  background-color: vars.$np-primary;
+  &:hover { box-shadow: vars.$np-shadow-md; }
 }
 
 // Forms
-.mat-mdc-form-field {
-  width: 100%;
-}
+.mat-mdc-form-field { width: 100%; }
 
 // ============================================================
-// Scrollbar Styling
+// Scrollbar
 // ============================================================
 
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: vars.$np-surface; }
-::-webkit-scrollbar-thumb {
-  background: vars.$np-primary-light;
-  border-radius: vars.$np-radius-full;
-}
+::-webkit-scrollbar          { width: 6px; height: 6px; }
+::-webkit-scrollbar-track    { background: vars.$np-surface; }
+::-webkit-scrollbar-thumb    { background: vars.$np-primary-light; border-radius: vars.$np-radius-full; }
 ::-webkit-scrollbar-thumb:hover { background: vars.$np-primary; }
 
 // ============================================================
@@ -169,6 +150,6 @@ body {
 @media print {
   .mat-toolbar,
   .mat-sidenav,
-  .np-no-print { display: none !important; }
+  .np-no-print  { display: none !important; }
   .mat-sidenav-content { margin-left: 0 !important; }
 }
