@@ -1,0 +1,87 @@
+<div class="rrhh">
+  <app-page-header title="RRHH" subtitle="Gestión de personal y solicitudes" icon="people" [breadcrumbs]="breadcrumbs">
+    <button mat-flat-button (click)="service.loadAll()" pageActions><mat-icon>refresh</mat-icon> Actualizar</button>
+  </app-page-header>
+
+  <div class="np-page-content">
+    <div style="position:relative"><app-loading-spinner [visible]="loading()" message="Cargando datos..." [inline]="true"></app-loading-spinner></div>
+
+    @if (!loading()) {
+      <!-- Directorio de empleados -->
+      <mat-card class="np-card" appearance="outlined">
+        <mat-card-header>
+          <mat-card-title>Directorio de Personal</mat-card-title>
+          <mat-card-subtitle>{{ empleados().length }} empleados ({{ empleados().filter(e => e.activo).length }} activos)</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="table-container">
+          <table mat-table [dataSource]="empleados()" class="np-table">
+            <ng-container matColumnDef="nombre">
+              <th mat-header-cell *matHeaderCellDef>Nombre</th>
+              <td mat-cell *matCellDef="let r"><strong>{{ r.nombre }} {{ r.apellidos }}</strong></td>
+            </ng-container>
+            <ng-container matColumnDef="cargo">
+              <th mat-header-cell *matHeaderCellDef>Cargo</th>
+              <td mat-cell *matCellDef="let r">{{ r.cargo }}</td>
+            </ng-container>
+            <ng-container matColumnDef="departamento">
+              <th mat-header-cell *matHeaderCellDef>Departamento</th>
+              <td mat-cell *matCellDef="let r">{{ r.departamento }}</td>
+            </ng-container>
+            <ng-container matColumnDef="turno">
+              <th mat-header-cell *matHeaderCellDef>Turno</th>
+              <td mat-cell *matCellDef="let r">{{ r.turno }}</td>
+            </ng-container>
+            <ng-container matColumnDef="telefono">
+              <th mat-header-cell *matHeaderCellDef>Teléfono</th>
+              <td mat-cell *matCellDef="let r">{{ r.telefono }}</td>
+            </ng-container>
+            <ng-container matColumnDef="activo">
+              <th mat-header-cell *matHeaderCellDef>Estado</th>
+              <td mat-cell *matCellDef="let r">
+                <span class="np-badge np-badge--{{ r.activo ? 'success' : 'error' }}">{{ r.activo ? 'Activo' : 'Inactivo' }}</span>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="colsEmpleados"></tr>
+            <tr mat-row *matRowDef="let row; columns: colsEmpleados;" class="table-row"></tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Solicitudes de permiso -->
+      <mat-card class="np-card" appearance="outlined" style="margin-top:16px">
+        <mat-card-header>
+          <mat-card-title>Solicitudes de Permiso</mat-card-title>
+          <mat-card-subtitle>{{ solicitudes().length }} solicitudes</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="table-container">
+          <table mat-table [dataSource]="solicitudes()" class="np-table">
+            <ng-container matColumnDef="empleado">
+              <th mat-header-cell *matHeaderCellDef>Empleado</th>
+              <td mat-cell *matCellDef="let r">{{ r.empleadoNombre }}</td>
+            </ng-container>
+            <ng-container matColumnDef="tipo">
+              <th mat-header-cell *matHeaderCellDef>Tipo</th>
+              <td mat-cell *matCellDef="let r">{{ r.tipo }}</td>
+            </ng-container>
+            <ng-container matColumnDef="fechaInicio">
+              <th mat-header-cell *matHeaderCellDef>Desde</th>
+              <td mat-cell *matCellDef="let r">{{ r.fechaInicio | date:'dd/MM/yyyy' }}</td>
+            </ng-container>
+            <ng-container matColumnDef="fechaFin">
+              <th mat-header-cell *matHeaderCellDef>Hasta</th>
+              <td mat-cell *matCellDef="let r">{{ r.fechaFin | date:'dd/MM/yyyy' }}</td>
+            </ng-container>
+            <ng-container matColumnDef="estado">
+              <th mat-header-cell *matHeaderCellDef>Estado</th>
+              <td mat-cell *matCellDef="let r">
+                <span class="np-badge np-badge--{{ solicitudColor(r.estado) }}">{{ solicitudLabel(r.estado) }}</span>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="colsSolicitudes"></tr>
+            <tr mat-row *matRowDef="let row; columns: colsSolicitudes;" class="table-row"></tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
+    }
+  </div>
+</div>
