@@ -1,0 +1,173 @@
+@use '../../styles/variables' as vars;
+@use '../../styles/mixins' as mix;
+
+.dashboard { height: 100%; }
+
+// ── Welcome banner ────────────────────────────────────────────
+
+.dashboard__welcome {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg, vars.$np-primary 0%, vars.$np-primary-dark 100%);
+  border-radius: vars.$np-radius-md;
+  padding: vars.$np-spacing-lg vars.$np-spacing-xl;
+  margin-bottom: vars.$np-spacing-lg;
+  color: vars.$np-white;
+
+  @include mix.respond-to('xs') {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: vars.$np-spacing-md;
+    padding: vars.$np-spacing-md;
+  }
+}
+
+.dashboard__greeting {
+  margin: 0 0 vars.$np-spacing-xs;
+  font-size: 22px;
+  font-weight: 400;
+
+  strong { font-weight: 700; }
+
+  @include mix.respond-to('xs') { font-size: 18px; }
+}
+
+.dashboard__date {
+  margin: 0;
+  font-size: 14px;
+  opacity: 0.85;
+  text-transform: capitalize;
+}
+
+.dashboard__welcome-badge {
+  display: flex;
+  align-items: center;
+  gap: vars.$np-spacing-sm;
+  background-color: rgba(255, 255, 255, 0.15);
+  padding: vars.$np-spacing-sm vars.$np-spacing-md;
+  border-radius: vars.$np-radius-full;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+
+  mat-icon { font-size: 20px; width: 20px; height: 20px; }
+
+  @include mix.respond-to('xs') { display: none; }
+}
+
+// ── Loading wrapper ───────────────────────────────────────────
+
+.dashboard__loading-wrapper {
+  min-height: 0;
+}
+
+// ── Stats grid ────────────────────────────────────────────────
+
+.dashboard__stats-grid {
+  @include mix.card-grid(260px);
+}
+
+// ── Stat card ─────────────────────────────────────────────────
+
+.stat-card {
+  border-radius: vars.$np-radius-md !important;
+  border: 1px solid vars.$np-border !important;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    box-shadow: vars.$np-shadow-md !important;
+    transform: translateY(-2px);
+  }
+
+  mat-card-content {
+    padding: vars.$np-spacing-lg !important;
+  }
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: vars.$np-spacing-md;
+  }
+
+  &__icon-wrap {
+    width: 48px;
+    height: 48px;
+    border-radius: vars.$np-radius-md;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    mat-icon {
+      font-size: 24px;
+      width: 24px;
+      height: 24px;
+    }
+
+    &--primary { background-color: vars.$np-primary-lighter; mat-icon { color: vars.$np-primary-dark; } }
+    &--success { background-color: #E8F5E9; mat-icon { color: #2E7D32; } }
+    &--warning { background-color: #FFF3E0; mat-icon { color: #E65100; } }
+    &--error   { background-color: #FFEBEE; mat-icon { color: #C62828; } }
+    &--info    { background-color: #E3F2FD; mat-icon { color: #1565C0; } }
+  }
+
+  &__trend {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: vars.$np-radius-full;
+
+    mat-icon { font-size: 16px; width: 16px; height: 16px; }
+  }
+
+  &__value {
+    font-size: 32px;
+    font-weight: 700;
+    color: vars.$np-text-primary;
+    line-height: 1;
+    margin-bottom: vars.$np-spacing-xs;
+
+    @include mix.respond-to('xs') { font-size: 28px; }
+  }
+
+  &__title {
+    font-size: 14px;
+    font-weight: 600;
+    color: vars.$np-text-primary;
+    margin-bottom: 2px;
+  }
+
+  &__subtitle {
+    font-size: 12px;
+    color: vars.$np-text-secondary;
+  }
+}
+
+// Trend colors
+.trend--up    { background-color: #E8F5E9; color: #2E7D32; }
+.trend--down  { background-color: #FFEBEE; color: #C62828; }
+.trend--neutral { background-color: vars.$np-background; color: vars.$np-text-secondary; }
+
+// ── Empty state ───────────────────────────────────────────────
+
+.dashboard__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: vars.$np-spacing-md;
+  padding: vars.$np-spacing-3xl;
+  color: vars.$np-text-disabled;
+
+  mat-icon {
+    font-size: 64px;
+    width: 64px;
+    height: 64px;
+  }
+
+  p { font-size: 16px; margin: 0; }
+}

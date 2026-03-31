@@ -1,0 +1,85 @@
+<div class="dashboard">
+
+  <!-- Page header -->
+  <app-page-header
+    title="Panel de Control"
+    [subtitle]="departmentLabel"
+    icon="dashboard"
+    [breadcrumbs]="breadcrumbs"
+  >
+    <button mat-stroked-button (click)="refresh()" pageActions aria-label="Actualizar datos">
+      <mat-icon>refresh</mat-icon>
+      Actualizar
+    </button>
+  </app-page-header>
+
+  <!-- Content -->
+  <div class="np-page-content dashboard__content">
+
+    <!-- Welcome banner -->
+    <div class="dashboard__welcome">
+      <div class="dashboard__welcome-text">
+        <h2 class="dashboard__greeting">
+          {{ greeting }}, <strong>{{ currentUser()?.firstName }}</strong>
+        </h2>
+        <p class="dashboard__date">
+          {{ 'Hoy es ' }}{{ (dashData()?.lastUpdated ?? null) | date:'EEEE, d MMMM yyyy':'':'es' }}
+        </p>
+      </div>
+      <div class="dashboard__welcome-badge">
+        <mat-icon>local_pharmacy</mat-icon>
+        Nature-Pharma
+      </div>
+    </div>
+
+    <!-- Loading state -->
+    <div class="dashboard__loading-wrapper" [style.position]="'relative'">
+      <app-loading-spinner
+        [visible]="loading()"
+        message="Cargando datos..."
+        [inline]="true"
+      ></app-loading-spinner>
+    </div>
+
+    <!-- Stats grid -->
+    @if (!loading() && dashData()) {
+      <div class="dashboard__stats-grid">
+        @for (card of dashData()!.statsCards; track card.title) {
+          <mat-card class="stat-card np-card stat-card--{{ card.color }}" appearance="outlined">
+            <mat-card-content>
+              <div class="stat-card__header">
+                <div class="stat-card__icon-wrap stat-card__icon-wrap--{{ card.color }}">
+                  <mat-icon>{{ card.icon }}</mat-icon>
+                </div>
+                @if (card.trend) {
+                  <div class="stat-card__trend {{ getTrendClass(card.trend) }}"
+                       [matTooltip]="card.trendValue ?? ''">
+                    <mat-icon>{{ getTrendIcon(card.trend) }}</mat-icon>
+                    @if (card.trendValue) {
+                      <span>{{ card.trendValue }}</span>
+                    }
+                  </div>
+                }
+              </div>
+              <div class="stat-card__value">{{ card.value }}</div>
+              <div class="stat-card__title">{{ card.title }}</div>
+              @if (card.subtitle) {
+                <div class="stat-card__subtitle">{{ card.subtitle }}</div>
+              }
+            </mat-card-content>
+          </mat-card>
+        }
+      </div>
+    }
+
+    <!-- Empty state -->
+    @if (!loading() && !dashData()) {
+      <div class="dashboard__empty">
+        <mat-icon>dashboard</mat-icon>
+        <p>No hay datos disponibles</p>
+        <button mat-flat-button (click)="refresh()">Reintentar</button>
+      </div>
+    }
+
+  </div>
+</div>
