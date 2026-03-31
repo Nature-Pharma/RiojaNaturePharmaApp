@@ -1,0 +1,113 @@
+@use '../../../../styles/variables' as vars;
+@use '../../../../styles/mixins' as mix;
+
+// ── Sidenav container ─────────────────────────────────────────
+
+.sidenav {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: vars.$np-sidenav-width;
+  background-color: vars.$np-white;
+  border-right: 1px solid vars.$np-border;
+  transition: width 0.25s ease;
+  overflow: hidden;
+
+  &--collapsed {
+    width: vars.$np-sidenav-collapsed-width;
+  }
+}
+
+// ── Header ────────────────────────────────────────────────────
+
+.sidenav__header {
+  display: flex;
+  align-items: center;
+  gap: vars.$np-spacing-sm;
+  padding: vars.$np-spacing-md vars.$np-spacing-md;
+  height: vars.$np-navbar-height;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, vars.$np-primary 0%, vars.$np-primary-dark 100%);
+
+  &--collapsed {
+    justify-content: center;
+    padding: vars.$np-spacing-md vars.$np-spacing-sm;
+  }
+}
+
+.sidenav__logo-icon {
+  color: vars.$np-white;
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+}
+
+.sidenav__brand {
+  font-size: 16px;
+  font-weight: 700;
+  color: vars.$np-white;
+  white-space: nowrap;
+  overflow: hidden;
+  letter-spacing: 0.3px;
+}
+
+// ── Nav list ──────────────────────────────────────────────────
+
+.sidenav__nav-list {
+  flex: 1;
+  padding: vars.$np-spacing-sm 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.sidenav__nav-item {
+  border-radius: 0 vars.$np-radius-full vars.$np-radius-full 0;
+  margin: 2px vars.$np-spacing-sm 2px 0;
+  transition: background-color 0.15s ease;
+
+  &.active-link {
+    background-color: vars.$np-primary-lighter;
+
+    .sidenav__nav-icon {
+      color: vars.$np-primary-dark;
+    }
+
+    .sidenav__nav-label {
+      color: vars.$np-primary-dark;
+      font-weight: 600;
+    }
+  }
+
+  &:hover:not(.active-link) {
+    background-color: vars.$np-background;
+  }
+}
+
+.sidenav__nav-icon {
+  color: vars.$np-text-secondary;
+  transition: color 0.15s ease;
+}
+
+.sidenav__nav-label {
+  color: vars.$np-text-primary;
+  font-size: 14px;
+  font-weight: 400;
+  white-space: nowrap;
+  transition: color 0.15s ease;
+}
+
+// ── Footer ────────────────────────────────────────────────────
+
+.sidenav__footer {
+  flex-shrink: 0;
+  padding-bottom: vars.$np-spacing-sm;
+}
+
+.sidenav__version {
+  font-size: 11px;
+  color: vars.$np-text-disabled;
+  text-align: center;
+  padding: vars.$np-spacing-sm vars.$np-spacing-md;
+  margin: 0;
+}

@@ -1,0 +1,45 @@
+@use '../../../styles/variables' as vars;
+@use '../../../styles/mixins' as mix;
+
+// ── Layout wrapper ────────────────────────────────────────────
+
+.layout-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+// ── Sidenav container ─────────────────────────────────────────
+
+.layout-container {
+  flex: 1;
+  overflow: hidden;
+
+  // Angular Material overrides
+  &.mat-drawer-container {
+    background-color: vars.$np-background;
+  }
+}
+
+// ── Sidenav ───────────────────────────────────────────────────
+
+.layout-sidenav {
+  border-right: none !important;
+  box-shadow: vars.$np-shadow-md;
+}
+
+// ── Content ───────────────────────────────────────────────────
+
+.layout-content {
+  overflow-y: auto;
+  background-color: vars.$np-background;
+
+  // On TV screens, limit content width
+  @include mix.respond-min('xl') {
+    > * {
+      max-width: vars.$np-content-max-width;
+      margin: 0 auto;
+    }
+  }
+}

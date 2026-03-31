@@ -1,0 +1,42 @@
+<nav class="sidenav" [class.sidenav--collapsed]="collapsed" aria-label="Navegación principal">
+
+  <!-- Brand header in sidenav (visible when not collapsed) -->
+  <div class="sidenav__header" [class.sidenav__header--collapsed]="collapsed">
+    <mat-icon class="sidenav__logo-icon">local_pharmacy</mat-icon>
+    @if (!collapsed) {
+      <span class="sidenav__brand">Nature-Pharma</span>
+    }
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <!-- Navigation items -->
+  <mat-nav-list class="sidenav__nav-list">
+    @for (item of navItems(); track item.route) {
+      <a
+        mat-list-item
+        [routerLink]="item.route"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: item.route === '/dashboard' }"
+        class="sidenav__nav-item"
+        [matTooltip]="collapsed ? item.label : ''"
+        matTooltipPosition="right"
+        [attr.aria-label]="item.label"
+      >
+        <mat-icon matListItemIcon class="sidenav__nav-icon">{{ item.icon }}</mat-icon>
+        @if (!collapsed) {
+          <span matListItemTitle class="sidenav__nav-label">{{ item.label }}</span>
+        }
+      </a>
+    }
+  </mat-nav-list>
+
+  <!-- Footer / version -->
+  @if (!collapsed) {
+    <div class="sidenav__footer">
+      <mat-divider></mat-divider>
+      <p class="sidenav__version">v1.0.0 · Nature-Pharma</p>
+    </div>
+  }
+
+</nav>
