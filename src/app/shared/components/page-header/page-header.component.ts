@@ -60,8 +60,8 @@ export interface Breadcrumb {
     </header>
   `,
   styles: [`
-    @use '../../../styles/variables' as vars;
-    @use '../../../styles/mixins' as mix;
+    @use 'styles/variables' as vars;
+    @use 'styles/mixins' as mix;
 
     .page-header {
       padding: vars.$np-spacing-lg vars.$np-spacing-lg vars.$np-spacing-md;
