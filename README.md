@@ -1,59 +1,56 @@
-# NaturePharma
+# RiojaNaturePharmaApp
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.5.
+Sistema de gestión interno para **Nature-Pharma**. Aplicación web frontend desarrollada con Angular 19 y Angular Material 21 (M3).
 
-## Development server
+## Tecnologías
 
-To start a local development server, run:
+- **Angular 19** — Standalone components, signals, lazy loading
+- **Angular Material 21** — M3 theme, paleta verde/blanco corporativa
+- **TypeScript 5.x**
+- **SCSS** — Variables, mixins responsive, tema personalizado
+
+## Módulos
+
+| Módulo | Ruta | Acceso |
+|---|---|---|
+| Dashboard | `/dashboard` | Todos los usuarios autenticados |
+| Fabricación | `/fabricacion` | Dept. Fabricación + Admin |
+| Logística | `/logistica` | Dept. Logística + Admin |
+| RRHH | `/rrhh` | Dept. RRHH + Admin |
+| Mantenimiento | `/mantenimiento` | Dept. Mantenimiento + Admin |
+
+## Usuarios de prueba (mock)
+
+| Usuario | Contraseña | Departamento | Rol |
+|---|---|---|---|
+| `admin` | `admin123` | Dirección | Admin (acceso total) |
+| `fabricacion` | `fab123` | Fabricación | User |
+| `logistica` | `log123` | Logística | User |
+| `rrhh` | `rrhh123` | RRHH | User |
+| `mantenimiento` | `mant123` | Mantenimiento | User |
+
+## Instalación
 
 ```bash
+npm install
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+La aplicación estará disponible en `http://localhost:4200`.
 
-## Code scaffolding
+## Arquitectura
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- **Feature-based** — cada módulo tiene sus propios componentes, servicios y modelos
+- **Standalone components** — sin NgModules
+- **Lazy loading** — cada feature se carga bajo demanda
+- **Signals** — gestión de estado reactiva sin NgRx
+- **SOLID** — Single Responsibility, Open/Closed, Liskov, Interface Segregation, Dependency Inversion
 
-```bash
-ng generate component component-name
-```
+## Responsive
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+| Pantalla | Comportamiento del sidenav |
+|---|---|
+| Móvil (< 600px) | Oculto por defecto, overlay con botón hamburguesa |
+| Tablet (600-959px) | Colapsado (solo iconos) |
+| Desktop (960-1919px) | Expandido en modo side |
+| TV (≥ 1920px) | Expandido, contenido centrado con max-width |
