@@ -19,11 +19,21 @@ $np-text-secondary: #616161;
 $np-text-disabled:  #9E9E9E;
 $np-text-on-primary:#FFFFFF;
 
-// Semantic
-$np-success:        #4CAF50;
+// Semantic foreground colors
+$np-success:        #43A047;   // distinct from $np-primary
 $np-warning:        #FF9800;
 $np-error:          #F44336;
 $np-info:           #2196F3;
+
+// Semantic background + foreground pairs (used by badges, icon-wraps, trends)
+$np-success-bg:     #E8F5E9;
+$np-success-fg:     #2E7D32;
+$np-warning-bg:     #FFF3E0;
+$np-warning-fg:     #E65100;
+$np-error-bg:       #FFEBEE;
+$np-error-fg:       #C62828;
+$np-info-bg:        #E3F2FD;
+$np-info-fg:        #1565C0;
 
 // Borders & Dividers
 $np-border:         #E0E0E0;

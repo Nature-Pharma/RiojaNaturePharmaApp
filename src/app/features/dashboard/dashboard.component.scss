@@ -105,11 +105,11 @@
       height: 24px;
     }
 
-    &--primary { background-color: vars.$np-primary-lighter; mat-icon { color: vars.$np-primary-dark; } }
-    &--success { background-color: #E8F5E9; mat-icon { color: #2E7D32; } }
-    &--warning { background-color: #FFF3E0; mat-icon { color: #E65100; } }
-    &--error   { background-color: #FFEBEE; mat-icon { color: #C62828; } }
-    &--info    { background-color: #E3F2FD; mat-icon { color: #1565C0; } }
+    &--primary { background-color: vars.$np-primary-lighter;  mat-icon { color: vars.$np-primary-dark; } }
+    &--success { background-color: vars.$np-success-bg;       mat-icon { color: vars.$np-success-fg; } }
+    &--warning { background-color: vars.$np-warning-bg;       mat-icon { color: vars.$np-warning-fg; } }
+    &--error   { background-color: vars.$np-error-bg;         mat-icon { color: vars.$np-error-fg; } }
+    &--info    { background-color: vars.$np-info-bg;          mat-icon { color: vars.$np-info-fg; } }
   }
 
   &__trend {
@@ -148,8 +148,8 @@
 }
 
 // Trend colors
-.trend--up    { background-color: #E8F5E9; color: #2E7D32; }
-.trend--down  { background-color: #FFEBEE; color: #C62828; }
+.trend--up      { background-color: vars.$np-success-bg; color: vars.$np-success-fg; }
+.trend--down    { background-color: vars.$np-error-bg;   color: vars.$np-error-fg; }
 .trend--neutral { background-color: vars.$np-background; color: vars.$np-text-secondary; }
 
 // ── Empty state ───────────────────────────────────────────────
