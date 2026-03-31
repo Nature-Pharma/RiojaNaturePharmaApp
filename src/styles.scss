@@ -1,0 +1,174 @@
+// ============================================================
+// Nature-Pharma Global Styles
+// ============================================================
+
+@use 'styles/variables' as vars;
+@use 'styles/mixins' as mix;
+@use '@angular/material' as mat;
+
+// Angular Material M3 theme - green/white palette
+html {
+  height: 100%;
+  @include mat.theme((
+    color: (
+      primary: mat.$green-palette,
+      tertiary: mat.$teal-palette,
+    ),
+    typography: Roboto,
+    density: 0,
+  ));
+
+  // Override CSS variables for brand identity
+  --mat-sys-primary: #{vars.$np-primary};
+  --mat-toolbar-container-background-color: #{vars.$np-primary};
+  --mat-toolbar-container-text-color: #{vars.$np-text-on-primary};
+  --mat-sidenav-container-background-color: #{vars.$np-white};
+  --mat-sidenav-container-divider-color: #{vars.$np-border};
+  --mat-list-active-indicator-color: #{vars.$np-primary-lighter};
+}
+
+body {
+  color-scheme: light;
+  background-color: vars.$np-background;
+  color: vars.$np-text-primary;
+  font: var(--mat-sys-body-medium);
+  margin: 0;
+  height: 100%;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+// ============================================================
+// Utility Classes
+// ============================================================
+
+.np-container {
+  width: 100%;
+  max-width: vars.$np-content-max-width;
+  margin: 0 auto;
+  padding: 0 vars.$np-spacing-md;
+
+  @include mix.respond-to('xs') {
+    padding: 0 vars.$np-spacing-sm;
+  }
+}
+
+.np-page-content {
+  padding: vars.$np-spacing-lg;
+  height: 100%;
+  box-sizing: border-box;
+
+  @include mix.respond-to('xs') {
+    padding: vars.$np-spacing-md vars.$np-spacing-sm;
+  }
+}
+
+.np-card-grid {
+  @include mix.card-grid();
+}
+
+.np-card-grid--small {
+  @include mix.card-grid(200px);
+}
+
+// Color utilities
+.text-primary   { color: vars.$np-primary; }
+.text-success   { color: vars.$np-success; }
+.text-warning   { color: vars.$np-warning; }
+.text-error     { color: vars.$np-error; }
+.text-secondary { color: vars.$np-text-secondary; }
+.text-muted     { color: vars.$np-text-disabled; }
+
+.bg-primary         { background-color: vars.$np-primary; color: vars.$np-white; }
+.bg-primary-light   { background-color: vars.$np-primary-lighter; }
+.bg-surface         { background-color: vars.$np-white; }
+
+// Status badges
+.np-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: vars.$np-radius-full;
+  font-size: 12px;
+  font-weight: 500;
+
+  &--success { background-color: #E8F5E9; color: vars.$np-primary-dark; }
+  &--warning { background-color: #FFF3E0; color: #E65100; }
+  &--error   { background-color: #FFEBEE; color: #C62828; }
+  &--info    { background-color: #E3F2FD; color: #1565C0; }
+}
+
+// Spacer
+.np-spacer { flex: 1 1 auto; }
+
+// ============================================================
+// Angular Material Overrides
+// ============================================================
+
+// Toolbar branding
+.mat-toolbar.np-main-toolbar {
+  background-color: vars.$np-primary;
+  color: vars.$np-text-on-primary;
+  box-shadow: vars.$np-shadow-md;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  .mat-icon-button .mat-icon {
+    color: vars.$np-text-on-primary;
+  }
+}
+
+// Sidenav active link
+.mat-nav-list .mat-list-item.active-link {
+  background-color: vars.$np-primary-lighter;
+  border-right: 3px solid vars.$np-primary;
+
+  .mat-icon,
+  .nav-label {
+    color: vars.$np-primary-dark;
+    font-weight: 600;
+  }
+}
+
+// Cards
+.mat-mdc-card.np-card {
+  border-radius: vars.$np-radius-md;
+  box-shadow: vars.$np-shadow-sm;
+  transition: box-shadow 0.2s ease;
+
+  &:hover {
+    box-shadow: vars.$np-shadow-md;
+  }
+}
+
+// Buttons
+.mat-mdc-raised-button.mat-primary {
+  background-color: vars.$np-primary;
+}
+
+// Forms
+.mat-mdc-form-field {
+  width: 100%;
+}
+
+// ============================================================
+// Scrollbar Styling
+// ============================================================
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: vars.$np-surface; }
+::-webkit-scrollbar-thumb {
+  background: vars.$np-primary-light;
+  border-radius: vars.$np-radius-full;
+}
+::-webkit-scrollbar-thumb:hover { background: vars.$np-primary; }
+
+// ============================================================
+// Print
+// ============================================================
+@media print {
+  .mat-toolbar,
+  .mat-sidenav,
+  .np-no-print { display: none !important; }
+  .mat-sidenav-content { margin-left: 0 !important; }
+}

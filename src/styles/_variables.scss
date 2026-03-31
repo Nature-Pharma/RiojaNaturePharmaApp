@@ -1,0 +1,56 @@
+// ============================================================
+// Nature-Pharma Design Tokens
+// ============================================================
+
+// Brand Colors
+$np-primary:        #4CAF50;
+$np-primary-light:  #81C784;
+$np-primary-lighter:#C8E6C9;
+$np-primary-dark:   #388E3C;
+$np-primary-darker: #1B5E20;
+
+$np-white:          #FFFFFF;
+$np-surface:        #FAFAFA;
+$np-background:     #F1F8F2;
+
+// Text
+$np-text-primary:   #212121;
+$np-text-secondary: #616161;
+$np-text-disabled:  #9E9E9E;
+$np-text-on-primary:#FFFFFF;
+
+// Semantic
+$np-success:        #4CAF50;
+$np-warning:        #FF9800;
+$np-error:          #F44336;
+$np-info:           #2196F3;
+
+// Borders & Dividers
+$np-border:         #E0E0E0;
+$np-divider:        #EEEEEE;
+
+// Shadows
+$np-shadow-sm:      0 1px 3px rgba(0, 0, 0, 0.12);
+$np-shadow-md:      0 2px 8px rgba(0, 0, 0, 0.15);
+$np-shadow-lg:      0 4px 16px rgba(0, 0, 0, 0.18);
+
+// Spacing scale (8px base)
+$np-spacing-xs:     4px;
+$np-spacing-sm:     8px;
+$np-spacing-md:     16px;
+$np-spacing-lg:     24px;
+$np-spacing-xl:     32px;
+$np-spacing-2xl:    48px;
+$np-spacing-3xl:    64px;
+
+// Layout
+$np-navbar-height:  64px;
+$np-sidenav-width:  240px;
+$np-sidenav-collapsed-width: 64px;
+$np-content-max-width: 1400px;
+
+// Border radius
+$np-radius-sm:      4px;
+$np-radius-md:      8px;
+$np-radius-lg:      16px;
+$np-radius-full:    9999px;

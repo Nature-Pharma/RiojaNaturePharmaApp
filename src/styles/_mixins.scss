@@ -1,0 +1,93 @@
+// ============================================================
+// Nature-Pharma Responsive Mixins
+// ============================================================
+// Breakpoints aligned with Angular CDK Breakpoints:
+//   xs  : < 600px   (phones)
+//   sm  : 600-959px  (tablets portrait)
+//   md  : 960-1279px (tablets landscape / small laptops)
+//   lg  : 1280-1919px(desktops)
+//   xl  : >= 1920px  (large screens / TV)
+
+$breakpoints: (
+  'xs': 600px,
+  'sm': 960px,
+  'md': 1280px,
+  'lg': 1920px,
+);
+
+@mixin respond-to($bp) {
+  @if $bp == 'xs' {
+    @media (max-width: 599px) { @content; }
+  } @else if $bp == 'sm' {
+    @media (min-width: 600px) and (max-width: 959px) { @content; }
+  } @else if $bp == 'md' {
+    @media (min-width: 960px) and (max-width: 1279px) { @content; }
+  } @else if $bp == 'lg' {
+    @media (min-width: 1280px) and (max-width: 1919px) { @content; }
+  } @else if $bp == 'xl' {
+    @media (min-width: 1920px) { @content; }
+  }
+}
+
+@mixin respond-min($bp) {
+  @if $bp == 'sm' {
+    @media (min-width: 600px) { @content; }
+  } @else if $bp == 'md' {
+    @media (min-width: 960px) { @content; }
+  } @else if $bp == 'lg' {
+    @media (min-width: 1280px) { @content; }
+  } @else if $bp == 'xl' {
+    @media (min-width: 1920px) { @content; }
+  }
+}
+
+@mixin respond-max($bp) {
+  @if $bp == 'xs' {
+    @media (max-width: 599px) { @content; }
+  } @else if $bp == 'sm' {
+    @media (max-width: 959px) { @content; }
+  } @else if $bp == 'md' {
+    @media (max-width: 1279px) { @content; }
+  } @else if $bp == 'lg' {
+    @media (max-width: 1919px) { @content; }
+  }
+}
+
+// Flexbox helpers
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// Card grid responsive
+@mixin card-grid($min-width: 280px) {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax($min-width, 1fr));
+  gap: 16px;
+
+  @include respond-to('xs') {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+// Truncate text
+@mixin truncate($lines: 1) {
+  @if $lines == 1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  } @else {
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
