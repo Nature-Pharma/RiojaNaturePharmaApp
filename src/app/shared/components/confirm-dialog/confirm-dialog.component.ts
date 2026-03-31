@@ -51,7 +51,7 @@ export interface ConfirmDialogData {
     </mat-dialog-actions>
   `,
   styles: [`
-    @use '../../../styles/variables' as vars;
+    @use 'styles/variables' as vars;
 
     .dialog-title {
       display: flex;

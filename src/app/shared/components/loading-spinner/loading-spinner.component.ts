@@ -17,7 +17,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     }
   `,
   styles: [`
-    @use '../../../styles/variables' as vars;
+    @use 'styles/variables' as vars;
 
     .spinner-overlay {
       position: absolute;

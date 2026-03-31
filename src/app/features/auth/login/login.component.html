@@ -8,7 +8,7 @@
   </div>
 
   <!-- Login card -->
-  <mat-card class="login-card" appearance="elevated">
+  <mat-card class="login-card">
 
     <!-- Header / Logo -->
     <div class="login-card__header">
@@ -83,8 +83,10 @@
             <mat-spinner diameter="20" class="login-form__spinner"></mat-spinner>
             <span>Iniciando sesión...</span>
           } @else {
-            <mat-icon>login</mat-icon>
-            <span>Iniciar sesión</span>
+            <ng-container>
+              <mat-icon>login</mat-icon>
+              <span>Iniciar sesión</span>
+            </ng-container>
           }
         </button>
 
